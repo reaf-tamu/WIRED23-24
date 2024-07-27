@@ -16,7 +16,7 @@ import numpy as np
 cam = cv2.VideoCapture(0)
 
 # load a pre-trained yolov8n model
-model = get_roboflow_model(model_id="bouy-bg2fz/3")
+model = get_roboflow_model(model_id="bouy-bg2fz/4")
 
 while True:
 	
@@ -68,7 +68,7 @@ while True:
 	except IndexError:
 		continue
 			
-			
+	"""	
 	#only go into this if statement if buoy is detected
 	if results[0].predictions[0].class_name == "buoy_red" or results[0].predictions[0].class_name == "bola_merah" or results[0].predictions[0].class_name == "Orange":
 		# move left
@@ -82,7 +82,7 @@ while True:
 			print("centered")
 	else:
 		print("turn right")
-
+	"""
 
 	print()
 	time.sleep(0.5)

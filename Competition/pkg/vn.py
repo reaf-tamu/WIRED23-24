@@ -1,6 +1,6 @@
 from vnpy import *
 from math import atan2, pi
-import thrusters
+from . import thrusters
 
 
 

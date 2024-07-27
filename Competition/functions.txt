@@ -1,0 +1,39 @@
+main.py
+	time.sleep(sec): pauses for specified time
+		Takes in: sec - pause time in seconds
+		Returns: none
+	camera.read(): CV2 function that takes image
+		Takes in: none
+		Returns: results - unknown data type, required to use function. frame - the actual image
+		
+
+cam.py
+	cam_setup(): sets up camera and model
+		Takes in: none
+		Returns: camera - object to take images. model - the loaded camera model that images are ran through
+	infer(frame, model): combines the lens' images and runs image through model
+		Takes in: frame - the current image. model - loaded camera model
+		Returns: results - lists all detected objects and their positions
+	detect_buoy(results): checks for buoy and its locations
+		Takes in: results - inference results
+		Returns: buoy - boolean, 1 if buoy is detected. X - horizontal location of buoy's center in camera's frame
+	detect_gate(results): checks for gate and its locations
+		Takes in: results - inference results
+		Returns: gate - boolean, 1 if gate is detected. X - horizontal location of gate's center in camera's frame
+	move(X): moves Guppy to desired position using thrusters.py
+		Takes in: X - object's horizontal center position
+		Returns: none
+	
+	NOTE: results is a weird object. The object's label is found using results[0].predictions[i].class_name where i is the index of the object if multiple are detected. Replace class_name with confidence or x to obtain other properties
+
+
+pinger.py
+	ping_setup(): connects to pinger
+		Takes in: none
+		Returns: myPing - object used to get data from pinger
+	depth(myPing): gets depth and converts it to meters
+
+
+
+
+

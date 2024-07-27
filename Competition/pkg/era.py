@@ -12,7 +12,7 @@ from . import thrusters
 
 def cam_setup():
 	#camera
-	camera = cv2.VideoCapture(0)
+	camera = cv2.VideoCapture(1)
 
 	# load v2 model
 	model = get_roboflow_model(model_id="bouy-bg2fz/4")
