@@ -27,13 +27,67 @@ cam.py
 	NOTE: results is a weird object. The object's label is found using results[0].predictions[i].class_name where i is the index of the object if multiple are detected. Replace class_name with confidence or x to obtain other properties
 
 
+mission.py
+	setup(): connects to mission switch
+		Takes in: none
+		Returns: none
+	start(): reads status as 1 (HIGH) and 0 (LOW)
+		Takes in: none
+		Returns: input_status - button's status
+
+
 pinger.py
 	ping_setup(): connects to pinger
 		Takes in: none
 		Returns: myPing - object used to get data from pinger
 	depth(myPing): gets depth and converts it to meters
+		Takes in: myPing - pinger object
+		Returns: ping - distance to floor in meters
+	move(depth, goal): activates thrusters to reach desired depth using thrusters.py
+		Takes in: depth - current depth measured by pinger. goal - desired depth in meters
+		Returns: none
 
 
+thrusters.py
+	thruster_setup(): connects to thrusters
+		Takes in: none
+		Returns: none
+	hover(): runs downward thrusters at a set speed to maintain depth
+		Takes in: none
+		Returns: none
+	right(): turns vehicle right while running hover()
+		Takes in: none
+		Returns: none
+	left(): turns vehicle left while running hover()
+		Takes in: none
+		Returns: none
+	forward(count): switches foward speeds each second to go straight
+		Takes in: count - determines which speed needs to run
+		Returns: count - adds one to count to maintain seconds
+	forward1(): one of the forward thruster speeds ran by forward(count)
+		Takes in: none
+		Returns: none
+	forward2(): one of the forward thruster speeds ran by forward(count)
+		Takes in: none
+		Returns: none
+	down(): moves vehicle down
+		Takes in: none
+		Returns: none
+	up(): turns off thrusters, relies on vehicles bouyany to take it up
+		Takes in: none
+		Returns: none
+		
+
+vn.py
+	sign(num): makes any negative orientation positive by making the scale 0 to 360, not -180 to 180
+		Takes in: num - number to be made positive
+		Returns: pos - new positive number
+	directions(head, x): keeps vehicle facing a range within the desired heading using thrusters.py
+		Takes in: head - desired orientation. x - current measured orientation
+		Returns: state - which direction are the thrusters running
+	orient(): measures current x,y,z orientation and turns x positive using sign()
+		Takes in: none
+		Returns: x - positive x orientation
 
 
 
