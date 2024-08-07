@@ -99,10 +99,10 @@ def detect_gate(results):
 	
 	
 	
-def move(X):
+def move(X, c):
 	if X < 550:
 		thrusters.left()
 	elif X > 580:
 		thruster.right()
 	else:
-		thrusters.forward()
+		thrusters.forward(c)
