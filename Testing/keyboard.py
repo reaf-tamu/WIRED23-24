@@ -3,6 +3,7 @@
 import time
 from adafruit_servokit import ServoKit
 from pynput import keyboard
+import cv2
 
 
 # initiate thrusters
@@ -69,6 +70,8 @@ A2.run()
 A1.setSpeed(90)
 A1.run()
 
+cam = cv2.VideoCapture(0)
+num = 1
 
 # FIXME: foward/backward need to be switched, left/right need to be switched
 print("ready")
@@ -165,6 +168,15 @@ def on_key_release(key):
 			A2.run()
 			A3.run()
 			A4.run()
+
+		# take photo
+		if key.char == "b":
+			result, frame = cam.read()
+			name = "zed" + str(num) + ".jpg"
+			cv2.imwrite(name, frame)
+			print("Saving", name)
+			num += 1
+			
 
 	except AttributeError:
 		pass

@@ -2,7 +2,7 @@
 # export ROBOFLOW_API_KEY=Lw0LcAJ8WMWM4TKlD71v
 
 # import functions
-from pkg import cam, pinger, thrusters, vn
+from pkg import cam, pinger, thrusters, vn, mission
 
 # imports
 import cv2
@@ -15,6 +15,7 @@ from vnpy import *
 camera, model = cam.cam_setup()
 myPing = pinger.ping_setup()
 thrusters.thruster_setup()
+mission.setup()
 
 # set up vector nav
 s = VnSensor()
@@ -22,6 +23,10 @@ s.connect("/dev/ttyUSB1",115200)
 
 
 # mission switch
+status = 0
+while status == 0:
+	status = mission.start()
+	time.sleep(1)
 
 # record initial orientation
 orientation = s.read_yaw_pitch_roll()
@@ -59,7 +64,8 @@ while True:
 	
 	# center and move to gate
 	cam.move(X)
-	
+
+	pinger.move(ping, goal)
 	time.sleep(0.5)
 
 
@@ -89,7 +95,8 @@ while True:
 	
 	# center and move to buoy
 	cam.move(X)
-	
+
+	pinger.move(ping, goal)
 	time.sleep(0.5)
 	
 # maybe go around buoy
