@@ -1,4 +1,4 @@
-main.py
+ main.py
 	time.sleep(sec): pauses for specified time
 		Takes in: sec - pause time in seconds
 		Returns: none

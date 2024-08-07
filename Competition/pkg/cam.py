@@ -1,5 +1,5 @@
 # have to run this the first time nano after nano it turned on
-# export ROBOFLOW_API_KEY=Lw0LcAJ8WMWM4TKlD71v
+#export ROBOFLOW_API_KEY=Lw0LcAJ8WMWM4TKlD71v
 
 # imports
 from inference import get_roboflow_model

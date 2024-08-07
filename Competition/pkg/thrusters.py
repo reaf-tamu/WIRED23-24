@@ -83,7 +83,7 @@ def forward(count):
 	else:
 		thrusters.forward2()
 	count += 1
-	returns count
+	return count
 
 def forward1():
 	hover()

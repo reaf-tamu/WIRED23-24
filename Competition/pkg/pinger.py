@@ -1,11 +1,11 @@
 from brping import Ping1D
-from . import thrusters
+# from . import thrusters
 
 
 # connect to sensor
 def ping_setup():
 	myPing = Ping1D()
-	myPing.connect_serial("/dev/ttyUSB0", 9600)
+	myPing.connect_serial("/dev/ttyUSB1", 9600)
 
 	if myPing.initialize() is False:
 	    print("Failed to initialize Ping!")
