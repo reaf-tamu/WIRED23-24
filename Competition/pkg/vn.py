@@ -13,7 +13,7 @@ def sign(num):
 	
 
 
-def direction(head, x):
+def direction(head, x, c):
 	if x > (head + 10):
 		thrusters.left()
 		state = "L"
@@ -21,6 +21,7 @@ def direction(head, x):
 		thrusters.right()
 		state = "R"
 	else:
+		thrusters.forward(c)
 		state = "F"
 
 	return state
