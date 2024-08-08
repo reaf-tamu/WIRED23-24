@@ -32,14 +32,15 @@ origin = orientation.x
 goal = 3
 ping = pinger.depth()
 while ping > goal:
-  pinger.move(ping, goal)
+  	pinger.move(ping, goal)
 	time.sleep(1)
 	ping = pinger.depth()
 
 # go straight using vectornav
 c = 0
 while True:
-  x = vn.orient()
-  state = vn.direction(origin, x)
-
-  time.sleep(1)
+	x = vn.orient()
+	state = vn.direction(origin, x, c)
+	pinger.move(ping, goal)
+	
+	time.sleep(1)
