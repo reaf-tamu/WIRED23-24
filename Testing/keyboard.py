@@ -70,7 +70,7 @@ A2.run()
 A1.setSpeed(90)
 A1.run()
 
-cam = cv2.VideoCapture(0)
+#cam = cv2.VideoCapture(0)
 num = 1
 
 # FIXME: foward/backward need to be switched, left/right need to be switched
@@ -82,24 +82,24 @@ def on_key_release(key):
 		# forward
 		if key.char == "w":
 			print("forward")
-			A1.setSpeed(81)
+			#A1.setSpeed(81)
 			A3.setSpeed(81)
-			M1.setSpeed(80)
+			#M1.setSpeed(80)
 			M3.setSpeed(80)
-			A1.run()
+			#A1.run()
 			A3.run()
-			M1.run()
+			#M1.run()
 			M3.run()
 		
 		if key.char == "e":
 			print("forward")
-			A1.setSpeed(80)
+			#A1.setSpeed(80)
 			A3.setSpeed(80)
-			M1.setSpeed(80)
+			#M1.setSpeed(80)
 			M3.setSpeed(80)
-			A1.run()
+			#A1.run()
 			A3.run()
-			M1.run()
+			#M1.run()
 			M3.run()
 
 
@@ -125,28 +125,28 @@ def on_key_release(key):
 			M2.run()
 			M4.run()
 
-		# left
+		# right
 		if key.char == "d":
 			print("right")
-			M1.setSpeed(100)
+			#M1.setSpeed(100)
 			M3.setSpeed(100)
-			A1.setSpeed(80)
+			#A1.setSpeed(80)
 			A3.setSpeed(80)
-			A1.run()
+			#A1.run()
 			A3.run()
-			M1.run()
+			#M1.run()
 			M3.run()
 
-		# right
+		# left
 		if key.char == 'a':
 			print("left")
-			A1.setSpeed(100)
+			#A1.setSpeed(100)
 			A3.setSpeed(100)
-			M1.setSpeed(80)
+			#M1.setSpeed(80)
 			M3.setSpeed(80)
-			A1.run()
+			#A1.run()
 			A3.run()
-			M1.run()
+			#M1.run()
 			M3.run()
 
 		# stop
@@ -170,12 +170,12 @@ def on_key_release(key):
 			A4.run()
 
 		# take photo
-		if key.char == "b":
-			result, frame = cam.read()
-			name = "zed" + str(num) + ".jpg"
-			cv2.imwrite(name, frame)
-			print("Saving", name)
-			num += 1
+		#if key.char == "b":
+			#result, frame = cam.read()
+			#name = "zed" + str(num) + ".jpg"
+			#cv2.imwrite(name, frame)
+			#print("Saving", name)
+			#num += 1
 			
 
 	except AttributeError:

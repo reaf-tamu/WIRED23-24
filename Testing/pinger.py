@@ -1,20 +1,23 @@
 from brping import Ping1D
+import time
 
 
 myPing = Ping1D()
-myPing.connect_serial("/dev/ttyUSB0", 9600)
+myPing.connect_serial("/dev/ttyUSB1", 9600)
 # For UDP
 # myPing.connect_udp("192.168.2.2", 9090)
 
 if myPing.initialize() is False:
     print("Failed to initialize Ping!")
     exit(1)
-    
-data = myPing.get_distance()
-if data:
-    print("Distance: %s\tConfidence: %s%%" % (data["distance"], data["confidence"]))
-else:
-    print("Failed to get distance data")
+
+while True:
+	data = myPing.get_distance()
+	if data:
+	    print("Distance: %s\tConfidence: %s%%" % (data["distance"], data["confidence"]))
+	else:
+	    print("Failed to get distance data")
+	time.sleep(1)
 
 
 

@@ -73,9 +73,9 @@ A1.run()
 
 while(1):
 	# left/right
-	M4.setSpeed(90)
-	M4.run()	
-	print('M4 =',M4.speed)
+	A4.setSpeed(80)
+	A4.run()	
+	print('A4 =',A4.speed)
 	time.sleep(1)
 
 
