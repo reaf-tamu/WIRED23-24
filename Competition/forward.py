@@ -1,45 +1,44 @@
 import time
 from adafruit_servokit import ServoKit
 
-def thruster_setup():
-	# initiate thrusters
-	kit = ServoKit(channels = 16)
+# initiate thrusters
+kit = ServoKit(channels = 16)
 
-	def set_speed(speed, motor):
-		kit.servo[motor].angle = speed
-		return
+def set_speed(speed, motor):
+	kit.servo[motor].angle = speed
+	return
 
-	class Motor:
-		def __init__(self, name):
-			self.name = name
-			self.speed = 90
+class Motor:
+	def __init__(self, name):
+		self.name = name
+		self.speed = 90
+		self.prev_speed = self.speed
+	def setSpeed(self, speed):
+		self.speed = speed
+
+	def run(self):
+		if self.prev_speed != self.speed:
+			# print("boop")
+			kit.servo[self.name].angle = self.speed
 			self.prev_speed = self.speed
-		def setSpeed(self, speed):
-			self.speed = speed
+		else:
+			return
+	def stop(self):
+		kit.servo[name] = 90
 
-		def run(self):
-			if self.prev_speed != self.speed:
-				# print("boop")
-				kit.servo[self.name].angle = self.speed
-				self.prev_speed = self.speed
-			else:
-				return
-		def stop(self):
-			kit.servo[name] = 90
+# set thrusters as global variables
+global A1, A2, A3, A4, M1, M2, M3, M4	
+global A2
 
-	# set thrusters as global variables
-	global A1, A2, A3, A4, M1, M2, M3, M4	
-	global A2
-	
-	# set thruster pins
-	A1 = Motor(0)
-	A2 = Motor(1)
-	A3 = Motor(2)
-	A4 = Motor(3)
-	M1 = Motor(4)
-	M2 = Motor(5)
-	M3 = Motor(6)
-	M4 = Motor(7)
+# set thruster pins
+A1 = Motor(0)
+A2 = Motor(1)
+A3 = Motor(2)
+A4 = Motor(3)
+M1 = Motor(4)
+M2 = Motor(5)
+M3 = Motor(6)
+M4 = Motor(7)
 
 def hover():
 	print("hovering")
@@ -79,9 +78,9 @@ def left():
 def forward(count):
 # switch forward thruster speeds
 	if count % 2 == 0:	
-		forward1()
+		thrusters.forward1()
 	else:
-		forward2()
+		thrusters.forward2()
 	count += 1
 	return count
 
@@ -123,7 +122,14 @@ def down():
 def up():
 	print("going up")
 	
+#time.sleep(30)
 
+count = 0
+while count< 6:
+	down()
+	time.sleep(5)
+	count += 1
 
-
-
+while True:
+	forward()
+	time.sleep(1)

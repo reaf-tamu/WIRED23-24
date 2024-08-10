@@ -26,9 +26,26 @@ def depth(myPing):
 
 # adjust depth
 def move(depth, goal):
-	if depth < (goal - 0.5):
-		thrusters.up()
-	elif depth > (goal + 0.5):
-		thrusters.down()
+	if (depth < (goal - 25)):
+		print("going up")
+	elif (depth > (goal + 25)):
+		print("going down")
+		A2.setSpeed(70)
+		A4.setSpeed(110)
+		M2.setSpeed(110)
+		M4.setSpeed(70)
+		A2.run()
+		A4.run()
+		M2.run()
+		M4.run()
+
 	else:
-		thrusters.hover()
+		print("hovering")
+		A2.setSpeed(71)
+		A4.setSpeed(109)
+		M2.setSpeed(109)
+		M4.setSpeed(71)
+		A2.run()
+		A4.run()
+		M2.run()
+		M4.run()

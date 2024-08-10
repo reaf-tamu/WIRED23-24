@@ -33,7 +33,7 @@ orientation = s.read_yaw_pitch_roll()
 origin = orientation.x
 
 # go down to specified depth and hover
-goal = 3
+goal = 750
 ping = pinger.depth()
 while ping > goal:
 	pinger.move(ping, goal)
