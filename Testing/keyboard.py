@@ -46,12 +46,12 @@ class Motor:
 # set thruster pins
 A1 = Motor(0)
 A2 = Motor(1)
-A3 = Motor(2)
-A4 = Motor(3)
+A3 = Motor(3)
+A4 = Motor(2)
 M1 = Motor(4)
 M2 = Motor(5)
-M3 = Motor(6)
-M4 = Motor(7)
+M3 = Motor(7)
+M4 = Motor(6)
 
 M4.setSpeed(90)
 M4.run()
@@ -70,6 +70,9 @@ A2.run()
 A1.setSpeed(90)
 A1.run()
 
+M1.setSpeed(90)
+M1.run()
+
 #cam = cv2.VideoCapture(0)
 num = 1
 
@@ -82,13 +85,13 @@ def on_key_release(key):
 		# forward
 		if key.char == "w":
 			print("forward")
-			#A1.setSpeed(81)
-			A3.setSpeed(81)
-			#M1.setSpeed(80)
-			M3.setSpeed(80)
-			#A1.run()
+			A1.setSpeed(80)
+			A3.setSpeed(79)
+			M1.setSpeed(80)
+			M3.setSpeed(79.5)
+			A1.run()
 			A3.run()
-			#M1.run()
+			M1.run()
 			M3.run()
 		
 		if key.char == "e":
@@ -116,50 +119,66 @@ def on_key_release(key):
 		# down
 		if key.char == "l":
 			print("down")
-			A2.setSpeed(71)
-			A4.setSpeed(109)
-			M2.setSpeed(109)
-			M4.setSpeed(71)
+			#A2.setSpeed(70)
+			A4.setSpeed(70)
+			#M2.setSpeed(110)
+			M4.setSpeed(70)
+			#A2.run()
+			A4.run()
+			#M2.run()
+			M4.run()
+
+
+		# right
+		if key.char == "d":
+			print("right")
+			M1.setSpeed(97)
+			A1.setSpeed(83)
+			A1.run()
+			#A3.run()
+			M1.run()
+			#M3.run()
+			A2.setSpeed(70)
+			A4.setSpeed(70)
+			M2.setSpeed(110)
+			M4.setSpeed(70)
 			A2.run()
 			A4.run()
 			M2.run()
 			M4.run()
 
-		# right
-		if key.char == "d":
-			print("right")
-			#M1.setSpeed(100)
-			M3.setSpeed(100)
-			#A1.setSpeed(80)
-			A3.setSpeed(80)
-			#A1.run()
-			A3.run()
-			#M1.run()
-			M3.run()
-
 		# left
 		if key.char == 'a':
 			print("left")
-			#A1.setSpeed(100)
-			A3.setSpeed(100)
-			#M1.setSpeed(80)
-			M3.setSpeed(80)
-			#A1.run()
-			A3.run()
-			#M1.run()
-			M3.run()
+			A1.setSpeed(95)
+			#A3.setSpeed(95)
+			M1.setSpeed(85)
+			#M3.setSpeed(85)
+			A1.run()
+			#A3.run()
+			M1.run()
+			#M3.run()
+			A2.setSpeed(70)
+			A4.setSpeed(70)
+			M2.setSpeed(110)
+			M4.setSpeed(70)
+			A2.run()
+			A4.run()
+			M2.run()
+			M4.run()
 
 		# stop
 		if key.char == "x":
 			print("stopping")
 			M1.setSpeed(90)
 			M2.setSpeed(90)
-			M3.setSpeed(90)						
+									
 			M4.setSpeed(90)
 			A1.setSpeed(90)
 			A2.setSpeed(90)
 			A3.setSpeed(90)
 			A4.setSpeed(90)
+			M3.setSpeed(90)
 			M1.run()
 			M2.run()
 			M3.run()
