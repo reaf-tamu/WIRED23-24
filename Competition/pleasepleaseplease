@@ -1,0 +1,256 @@
+#!/usr/bin/env python3
+import message_filters
+from std_msgs.msg import Float32,String, Bool
+import time
+from adafruit_servokit import ServoKit
+import numpy as np
+from vnpy import *
+from brping import Ping1D
+from pkg import vn
+
+#Connecting to pinger
+myPing = Ping1D()
+myPing.connect_serial("/dev/ttyUSB1", 115200)
+if myPing.initialize() is False:
+    print("Failed to initialize Ping!")
+    exit(1)
+
+myPing.set_ping_interval(29)
+myPing.set_speed_of_sound(1500)
+
+#get pinger value:
+
+
+
+#Code from thrusters.py
+def thruster_setup():
+	# initiate thrusters
+	kit = ServoKit(channels = 16)
+
+	def set_speed(speed, motor):
+		kit.servo[motor].angle = speed
+		return
+
+	class Motor:
+		def __init__(self, name):
+			self.name = name
+			self.speed = 90
+			self.prev_speed = self.speed
+		def setSpeed(self, speed):
+			self.speed = speed
+
+		def run(self):
+			if self.prev_speed != self.speed:
+				# print("boop")
+				kit.servo[self.name].angle = self.speed
+				self.prev_speed = self.speed
+			else:
+				return
+		def stop(self):
+			kit.servo[name] = 90
+
+	# set thrusters as global variables
+	global A1, A2, A3, A4, M1, M2, M3, M4	
+	global A2
+	
+	# set thruster pins
+	A1 = Motor(0)
+	A2 = Motor(1)
+	A3 = Motor(2)
+	A4 = Motor(3)
+	M1 = Motor(4)
+	M2 = Motor(5)
+	M3 = Motor(6)
+	M4 = Motor(7)
+
+def hover():
+	print("hovering")
+	A2.setSpeed(71)
+	A4.setSpeed(109)
+	M2.setSpeed(109)
+	M4.setSpeed(71)
+	A2.run()
+	A4.run()
+	M2.run()
+	M4.run()
+
+def right():
+	hover()
+	print("turning right")
+	A1.setSpeed(100)
+	A3.setSpeed(100)
+	M1.setSpeed(80)
+	M3.setSpeed(80)
+	A1.run()
+	A3.run()
+	M1.run()
+	M3.run()
+	
+def left():
+	hover()
+	print("turning left")
+	M1.setSpeed(100)
+	M3.setSpeed(100)
+	A1.setSpeed(80)
+	A3.setSpeed(80)
+	A1.run()
+	A3.run()
+	M1.run()
+	M3.run()
+	
+def forward(count):
+# switch forward thruster speeds
+if count % 2 == 0:	
+		thrusters.forward1()
+	else:
+		thrusters.forward2()
+
+def forward1():
+	hover()
+	print("going forward 1")
+	A1.setSpeed(81)
+	A3.setSpeed(81)
+	M1.setSpeed(80)
+	M3.setSpeed(80)
+	A1.run()
+	A3.run()
+	M1.run()
+	M3.run()
+	
+def forward2():
+	hover()
+	print("going forward 2")
+	A1.setSpeed(80)
+	A3.setSpeed(80)
+	M1.setSpeed(80)
+	M3.setSpeed(80)
+	A1.run()
+	A3.run()
+	M1.run()
+	M3.run()
+
+def down():
+	print("going down")
+	A2.setSpeed(70)
+	A4.setSpeed(110)
+	M2.setSpeed(110)
+	M4.setSpeed(70)
+	A2.run()
+	A4.run()
+	M2.run()
+	M4.run()
+
+def up():
+	print("going up")
+	
+thrusters.thruster_setup()
+
+
+
+# set variables
+TARGET_DEPTH = 0.5 #adjust this constant as needed
+ping = 0
+vnav = 0
+mission_switch = False
+switch = False
+
+	
+	# first loop through
+	if vnav == 0:
+		continue
+	else:
+		string1 = vnav[1:]
+		string2 = string1[:-1]
+		vnav_list = string2.split(',')
+
+	# assign data and origin
+	vn_x = float(vnav_list[0])
+	origin = vn_x
+	print("origin =", origin)
+	origin_left = origin - 10
+	origin_right = origin + 10
+
+	if ping == 0:
+		print("no pinger detected")	
+		continue
+	else:
+		while ping > TARGET_DEPTH:
+			get_data()
+			print(ping)
+			print("going down")
+			A4.setSpeed(105)
+			A4.run()
+
+			A2.setSpeed(105)
+			A2.run()
+	# hover
+	print("hover")
+	A4.setSpeed(102)
+	A4.run()
+
+	A2.setSpeed(102)
+	A2.run()
+
+	# go straight with origin correction
+	# go left
+	while vn_x < origin_left:
+		# parse vnav data
+		string1 = vnav[1:]
+		string2 = string1[:-1]
+		vnav_list = string2.split(',')
+		vn_x = float(vnav_list[0])
+
+		print("going right")
+		A1.setSpeed(104)
+		A1.run()
+
+		A3.setSpeed(104)
+		A3.run()
+
+		M4.setSpeed(100)
+		M4.run()	
+
+		M1.setSpeed(100)
+		M1.run()
+
+		# hover
+		A4.setSpeed(105)
+		A4.run()	
+		print('A4 =',A4.speed)
+		A2.setSpeed(105)
+		A2.run()	
+		print('A2 =',A2.speed)
+
+		time.sleep(1)
+
+	while vn_x > origin_right:
+		get_data()
+
+		# parse vnav data
+		string1 = vnav[1:]
+		string2 = string1[:-1]
+		vnav_list = string2.split(',')
+		vn_x = float(vnav_list[0])
+
+		print("going left")
+		A1.setSpeed(100)
+		A1.run()
+
+		A3.setSpeed(100)
+		A3.run()
+
+		M4.setSpeed(100)
+		M4.run()	
+
+		M1.setSpeed(100)
+		M1.run()
+
+		# hover
+		A4.setSpeed(105)
+		A4.run()	
+		print('A4 =',A4.speed)
+		A2.setSpeed(105)
+		A2.run()	
+		print('A2 =',A2.speed)
+
+		time.sleep(1)
